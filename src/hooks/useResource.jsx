@@ -13,10 +13,11 @@ export default function useResource() {
       }, []);
 
     // Post assignment for tests.
-    const post = (assg) => {
+    const post = (assg,url) => {
         axios
-        .post(`http://localhost:3000/api/assignment/${assg.name}`, url)
-        .then((res) => console.log("Evaluation starting"))
+        .post(`http://localhost:3000/api/assignment/${assg}`, url)
+        .then(console.log("Evaluation starting"))
+        .then((res) => console.log(res.data))
         .catch((error) => console.log(error.message));
     }
     const service = {post}
