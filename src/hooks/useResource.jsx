@@ -4,6 +4,7 @@ import axios from "axios";
 
 export default function useResource() {
     const [resources, setResources] = useState([]);
+    const [results, setResults] = useState([])
     // Get a list of available assignments from DB
     useEffect(() => {
         axios
@@ -17,9 +18,9 @@ export default function useResource() {
         axios
         .post(`http://localhost:3000/api/assignment/${assg}`, url)
         .then(console.log("Evaluation starting"))
-        .then((res) => console.log(res.data))
+        .then((res) => setResults(res.data))
         .catch((error) => console.log(error.message));
     }
     const service = {post}
-    return [resources, service]
+    return [resources, service, results]
 }
