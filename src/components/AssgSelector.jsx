@@ -16,12 +16,13 @@ const AssgSelector = (props) => {
      setAssg(name);
   }
 
-  const onEvaluate = () =>{
+  const onEvaluate  =  () =>{
     const body = {url: url}
     assgService.post(assg, body)
   }
 
   return(
+    <>
     <div className="assgContainer">
       <p>1. Begin by selecting the correspoding assignment with your task below</p>
     <select onChange={(event) => onAssgSelect(event.target.value)}>
@@ -41,6 +42,13 @@ const AssgSelector = (props) => {
       <button className="assgBtn" onClick={onEvaluate}>Send</button>
 
     </div>
+
+    <div>
+        {results.map(item => (
+          <p>{item.description} : {item.result}</p>
+      ))}
+    </div>
+    </>
   )
 }
 

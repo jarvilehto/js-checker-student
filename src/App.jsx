@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
-import useResource from './hooks/useResource'
 import AssgSelector from './components/AssgSelector'
+import AssgResults from './components/AssgResults'
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
             <a href='https://users.metropolia.fi/~username/folder' target='_blank'> users.metropolia.fi</a> </h3>
         </div>
         <AssgSelector/>
+        <AssgResults />
     </div>
     </>
   )
