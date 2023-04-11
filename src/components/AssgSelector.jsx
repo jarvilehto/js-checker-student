@@ -2,18 +2,24 @@ import React from 'react'
 import { useState } from 'react'
 import useResource from '../hooks/useResource'
 import { FaChevronRight } from "react-icons/fa"
+import AssgResults from './AssgResults'
 
-const AssgSelector = (props) => {
+const AssgSelector = () => {
   const [assgs, assgService, results] = useResource();
   const [assg, setAssg] = useState("");
   const [url, setURL] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading,  setLoading] = useState(false);
   
+
+  const onLoading = () => {
+      setLoading(!loading)
+  }
+
   const onUrlChange = (name) =>{
       setURL(name)
   }
-
   
   const onAssgSelect = (name) =>{
     if(name == assg){
@@ -31,6 +37,7 @@ const AssgSelector = (props) => {
       }else{
         const body = {url: url}
         assgService.post(assg, body)
+        onLoading()
       }
   }
 
@@ -43,6 +50,13 @@ const AssgSelector = (props) => {
 
   return(
     <>
+    {!loading &&(
+       <>
+        <div>
+          <h3>Begin evaluating your JS/HTML assignments by making sure you have uploaded your assignment to 
+            <a href='https://users.metropolia.fi/~username/folder' target='_blank'> users.metropolia.fi</a> </h3>
+        </div>
+
     <div className='assgContainer'>
       <p>1. Begin by selecting the correspoding assignment with your task below</p>
       <div className='dropdown'>
@@ -73,7 +87,15 @@ const AssgSelector = (props) => {
           <p>{item.description} : {item.result}</p>
       ))}
      </div>
-
+     </>
+    )
+    }
+    {loading &&(
+      <AssgResults 
+        res = {results}
+        onLoading={onLoading}
+      />
+    )}
     </>
  
     /*
