@@ -16,16 +16,24 @@ const AssgSelector = (props) => {
 
   
   const onAssgSelect = (name) =>{
-     setAssg(name);
+    if(name == assg){
+      setAssg("")
+    }
+    else{ 
+      setAssg(name) 
+    }
   }
 
   const onEvaluate  =  () =>{
-    const body = {url: url}
-    assgService.post(assg, body)
+      if(!assg || !url){
+        alert("Make sure you have selected an assignment and given a URL")
+        return
+      }else{
+        const body = {url: url}
+        assgService.post(assg, body)
+      }
   }
 
- 
-  
   const toggleDropdown = () => setOpen(!isOpen);
   
   const handleItemClick = (id) => {

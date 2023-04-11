@@ -1,7 +1,8 @@
 #root {
   width: 45%;
   max-width: 800px;
-  height: 85%;
+  min-height: 650px;
+  max-height: 800px;
   margin: 0 auto;
   padding: 2em;
   text-align: center;
@@ -82,13 +83,14 @@
 }
 
 .dropdown-body {
+  max-height: 0;
   padding: 5px;
   border-top: 1px solid #E5E8EC;
   display: none;
 }
 
 .dropdown-body.open {
-  max-height: 400px;
+  max-height: 250px;
   display: block;
   overflow-y: auto;
 }
