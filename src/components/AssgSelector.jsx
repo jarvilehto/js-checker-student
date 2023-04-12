@@ -30,14 +30,29 @@ const AssgSelector = () => {
     }
   }
 
+  const isValidUrl = urlString=> {
+	  	var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+	    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+	    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+	    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+	    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+	  return !!urlPattern.test(urlString);
+	}
+
   const onEvaluate  =  () =>{
       if(!assg || !url){
         alert("Make sure you have selected an assignment and given a URL")
         return
       }else{
+        if(isValidUrl(url)){
         const body = {url: url}
         assgService.post(assg, body)
         onLoading()
+        }else{
+          alert("Invalid URL!")
+          return
+        }
       }
   }
 
@@ -75,18 +90,12 @@ const AssgSelector = () => {
     </div>
 
     <p>2. Paste the URL to the assignment HTML from your users.metropolia.fi</p>
-      <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder='users.metropolia.fi'/> 
+      <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder={url}/> 
 
       <p>3. Send code for evaluation!</p>
       <button className="assgBtn" onClick={onEvaluate}>Send</button>
 
     </div>
-
-      <div>
-        {results.map(item => (
-          <p>{item.description} : {item.result}</p>
-      ))}
-     </div>
      </>
     )
     }
