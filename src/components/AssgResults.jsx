@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import useResource from '../hooks/useResource'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 /*
     TODO: Filter results by "PASS" and "FAIL"
@@ -38,7 +39,14 @@ const  AssgResults = (props) => {
       <>
           { ani && (
       <div>
-        <h3>Hang in there we are crunching some numbers!</h3>
+        <h3>Evaluating...</h3>
+        <Player 
+        src='https://assets8.lottiefiles.com/packages/lf20_kxsd2ytq.json' 
+        className='player' 
+        loop 
+        autoplay
+        style={{height:'200px', width:'200px'}}
+        />
       </div>
       )}
 
