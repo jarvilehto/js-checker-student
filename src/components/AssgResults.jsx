@@ -38,7 +38,7 @@ const  AssgResults = (props) => {
     return(
       <>
           { ani && (
-      <div>
+        <div>
         <h3>Evaluating...</h3>
         <Player 
         src='https://assets8.lottiefiles.com/packages/lf20_kxsd2ytq.json' 
@@ -52,23 +52,31 @@ const  AssgResults = (props) => {
 
 
       { (!isPass && !ani) && (
-      <div style={{padding:"20px", textAlign:"center"}}>
+        <>
       <div>
+        <h2 style={{color:'red'}}>FAIL!</h2>
         <h3>Something is not quite right...😓</h3>
       </div>
-      <div style={{padding:"20px", marginBottom:"60px"}}>
+      
+      <div style={{textAlign:'left', width:'350px', margin:'auto', display:'flex', justifyContent:'center', flexDirection:'column'
+      , padding:'10px', borderRadius:'10px'}}>
+        <p style={{marginBottom:'0px'}}>What went wrong</p>
+         <div style={{ marginBottom:"60px"}}>
       {props.res.map(item => (
         <p>{item.description} : {item.result}</p>
       ))} 
       </div>
-      <button onClick={() => props.onLoading()}> Ok </button>
       </div>
+
+
+      <button onClick={() => props.onLoading()}> Ok </button>
+      </>
     )}
     {(isPass && !ani) &&(
       <>
       <div>
-        <h1>Hey Everything looks good! Great job! 👍</h1>
-        <h2>Make sure to submit the assignment! 😊</h2>
+        <h2 style={{color:'green'}}>PASS!</h2>
+        <h3>Hey Everything looks good! Great job! 👍</h3>
       </div>
       <div>
       <button onClick={() => props.onLoading()}> Ok </button>
