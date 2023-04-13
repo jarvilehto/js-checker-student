@@ -3,6 +3,7 @@ import { useState } from 'react'
 import useResource from '../hooks/useResource'
 import { FaChevronRight } from "react-icons/fa"
 import AssgResults from './AssgResults'
+import useTest from '../hooks/testHook'
 
 const AssgSelector = () => {
   const [assgs, assgService, results] = useResource();
@@ -11,10 +12,12 @@ const AssgSelector = () => {
   const [isOpen, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [loading,  setLoading] = useState(false);
+  const [res , setRes] = useState(null);
   
 
   const onLoading = () => {
-      setLoading(!loading)
+      setRes(null);
+      setLoading(!loading);
   }
 
   const onUrlChange = (name) =>{
@@ -40,15 +43,18 @@ const AssgSelector = () => {
 	  return !!urlPattern.test(urlString);
 	}
 
-  const onEvaluate  =  () =>{
+  const onEvaluate  =  async () =>{
       if(!assg || !url){
         alert("Make sure you have selected an assignment and given a URL")
         return
       }else{
         if(isValidUrl(url)){
         const body = {url: url}
-        assgService.post(assg, body)
-        onLoading()
+        onLoading();
+        const b = await useTest(assg,body);
+        setRes(b);
+        //assgService.post(assg, body)
+        //onLoading()
         }else{
           alert("Invalid URL!")
           return
@@ -101,7 +107,7 @@ const AssgSelector = () => {
     }
     {loading &&(
       <AssgResults 
-        res = {results}
+        res = {res}
         onLoading={onLoading}
       />
     )}

@@ -17,9 +17,9 @@ import { Player } from '@lottiefiles/react-lottie-player'
 
 
 const  AssgResults = (props) => {
-    const [ani, setAni] = useState(true)
+    let ani = true
     let isPass = true
-    console.log(props.res)
+    console.log(props.res != null)
 
     const checkResults = () =>{
     for(const res of props.res){
@@ -27,13 +27,12 @@ const  AssgResults = (props) => {
           isPass = false
         }
     }
-    setTimeout(() => {
-      setAni(false)
-      }, 2000);
+    ani = false
   }
 
-  checkResults();
-
+  if(props.res != null){
+    checkResults();
+  }
 
     return(
       <>
