@@ -20,6 +20,7 @@ const  AssgResults = (props) => {
     let ani = true
     let isPass = true
     console.log(props.res != null)
+    console.log(props.res)
 
     const checkResults = () =>{
     for(const res of props.res){

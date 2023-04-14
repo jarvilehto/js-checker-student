@@ -79,7 +79,7 @@ const AssgSelector = () => {
         </div>
 
     <div className='assgContainer'>
-      <p>1. Begin by selecting the correspoding assignment with your task below</p>
+      <p className='pmarginBottom'>1. Begin by selecting the correspoding assignment with your task below</p>
       <div className='dropdown'>
       <div className='dropdown-header' onClick={toggleDropdown}>
         {selectedItem ? assgs.find(item => item._id == selectedItem).name : "Select assignment"}
