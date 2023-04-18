@@ -6,24 +6,38 @@ import AssgResults from './AssgResults'
 import useTest from '../hooks/testHook'
 
 const AssgSelector = () => {
-  const [assgs, assgService, results] = useResource();
+  //Get all the listed assignments from database
+  const [assgs] = useResource();
+  //Currently selected assignment
   const [assg, setAssg] = useState("");
+  //Users url input
   const [url, setURL] = useState("");
   const [isOpen, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  //Loading animation toggle
   const [loading,  setLoading] = useState(false);
+  //State variable for test validation responses.
   const [res , setRes] = useState(null);
   
-
+  /*
+  Resets res to null and sets setLoading to true of false
+  Removing or starting the loading animation of the page.
+  */
   const onLoading = () => {
       setRes(null);
       setLoading(!loading);
   }
 
+  //Updates the Input field with input from user.
   const onUrlChange = (name) =>{
       setURL(name)
   }
   
+  /*
+  When selecting an assignment from the dropdown menu 
+  Sets it to be the active assignment. If selected again
+  Sets assignment to be empty.
+  */
   const onAssgSelect = (name) =>{
     if(name == assg){
       setAssg("")
@@ -33,6 +47,7 @@ const AssgSelector = () => {
     }
   }
 
+  // Checks if userinput is a valid URL.
   const isValidUrl = urlString=> {
 	  	var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
 	    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
@@ -43,6 +58,14 @@ const AssgSelector = () => {
 	  return !!urlPattern.test(urlString);
 	}
 
+  /*
+    1. Checks if assg and url fields are not empyty
+       and reminds the user to select an assignment and to input a working URL
+    2. Checks if the URL is valid after the 1st test.
+    3. Starts the loading animation by calling onLoading();
+       useTest is called to validate the users test and the result is then
+        returned and set as the 'res' state variable. 
+  */
   const onEvaluate  =  async () =>{
       if(!assg || !url){
         alert("Make sure you have selected an assignment and given a URL")
@@ -53,8 +76,7 @@ const AssgSelector = () => {
         onLoading();
         const b = await useTest(assg,body);
         setRes(b);
-        //assgService.post(assg, body)
-        //onLoading()
+        console.log(b);
         }else{
           alert("Invalid URL!")
           return
@@ -62,8 +84,10 @@ const AssgSelector = () => {
       }
   }
 
+  //Is used to toggle the state of the dropdown menu true/false.
   const toggleDropdown = () => setOpen(!isOpen);
   
+  //Dropdown menu uses this to handle which item is selected.
   const handleItemClick = (id) => {
     selectedItem == id ? setSelectedItem(null) : setSelectedItem(id);
     toggleDropdown();
@@ -112,36 +136,6 @@ const AssgSelector = () => {
       />
     )}
     </>
- 
-    /*
-    <>
-    <div className="assgContainer">
-      <p>1. Begin by selecting the correspoding assignment with your task below</p>
-    <select onChange={(event) => onAssgSelect(event.target.value)}>
-      <option value=""><p>Choose task</p></option>
-      {assgs.map((assg, index) => (
-        <option key={index} value={assg.name}>
-          {assg.name}
-        </option>
-      ))}
-    </select>
-    
-    <p>2. Paste the URL to the assignment HTML from your users.metropolia.fi</p>
-
-      <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder='users.metropolia.fi'/> 
-
-      <p>3. Send code for evaluation!</p>
-      <button className="assgBtn" onClick={onEvaluate}>Send</button>
-
-    </div>
-
-    <div>
-        {results.map(item => (
-          <p>{item.description} : {item.result}</p>
-      ))}
-    </div>
-    </>
-    */
   )
 }
 
