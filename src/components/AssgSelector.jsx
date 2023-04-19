@@ -48,13 +48,15 @@ const AssgSelector = () => {
   }
 
   // Checks if userinput is a valid URL.
-  const isValidUrl = urlString=> {
+  const isValidUrl = (urlString)=> {
 	  	var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
 	    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
 	    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
 	    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
 	    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
-	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator~
+      const url = new URL(urlString);
+      console.log(url.pathname.split('/')[1])
 	  return !!urlPattern.test(urlString);
 	}
 
