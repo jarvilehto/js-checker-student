@@ -6,18 +6,16 @@ import AssgResults from './AssgResults'
 import useTest from '../hooks/testHook'
 
 const AssgSelector = () => {
-  //Get all the listed assignments from database
+  //States for assignment related variables
   const [assgs] = useResource();
-  //Currently selected assignment
   const [assg, setAssg] = useState("");
-  //Users url input
   const [url, setURL] = useState("");
+  const [res , setRes] = useState(null);
+
+  //States for elements / UI
   const [isOpen, setOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-  //Loading animation toggle
   const [loading,  setLoading] = useState(false);
-  //State variable for test validation responses.
-  const [res , setRes] = useState(null);
   
   /*
   Resets res to null and sets setLoading to true of false
@@ -55,9 +53,7 @@ const AssgSelector = () => {
 	    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
 	    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
 	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator~
-      const url = new URL(urlString);
-      console.log(url.pathname.split('/')[1])
-	  return !!urlPattern.test(urlString);
+	    return !!urlPattern.test(urlString);
 	}
 
   /*
@@ -78,7 +74,6 @@ const AssgSelector = () => {
         onLoading();
         const b = await useTest(assg,body);
         setRes(b);
-        console.log(b);
         }else{
           alert("Invalid URL!")
           return
@@ -103,7 +98,6 @@ const AssgSelector = () => {
           <h3>Begin evaluating your JS/HTML assignments by making sure you have uploaded your assignment to 
             <a href='https://users.metropolia.fi/~username/folder' target='_blank'> users.metropolia.fi</a> </h3>
         </div>
-
     <div className='assgContainer'>
       <p className='pmarginBottom'>1. Begin by selecting the correspoding assignment with your task below</p>
       <div className='dropdown'>
@@ -120,20 +114,18 @@ const AssgSelector = () => {
         ))}
       </div>
     </div>
-
     <p>2. Paste the URL to the assignment HTML from your users.metropolia.fi</p>
       <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder={url}/> 
-
       <p>3. Send code for evaluation!</p>
       <button className="assgBtn" onClick={onEvaluate}>Send</button>
-
-    </div>
+     </div>
      </>
     )
     }
     {loading &&(
       <AssgResults 
         res = {res}
+        url = {url}
         onLoading={onLoading}
       />
     )}

@@ -1,11 +1,6 @@
 import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
-
-/*
-
-
-*/
-
+import studentHooks from '../hooks/studentHooks'
 
 const  AssgResults = (props) => {
     /*
@@ -22,14 +17,27 @@ const  AssgResults = (props) => {
       is to be shown to the user.
       After that the loading animation is set to false.
     */
+      const saveResult = () =>{
+      const url = new URL(props.url)
+      const body = {
+          user: url.pathname.split("/")[1].substring(1),
+          assignment: url.pathname.split("/")[3],
+          result: isPass
+      }
+      studentHooks(body)
+  }
+
     const checkResults = () =>{
     for(const res of props.res){
         if(res.result == "FAIL"){
           isPass = false
         }
     }
-    ani = false
+    ani = false;
+    saveResult();
   }
+
+
 
   //checkResult() only if res is not empty.
   if(props.res != null){
