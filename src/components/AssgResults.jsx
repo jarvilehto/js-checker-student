@@ -11,22 +11,6 @@ const  AssgResults = (props) => {
     let ani = true
     let isPass = true
 
-    /*
-      Parse through the result response to see if any test has failed.
-      If a test fails isPass is set to false and a different set of elements
-      is to be shown to the user.
-      After that the loading animation is set to false.
-    */
-      const saveResult = () =>{
-      const url = new URL(props.url)
-      const body = {
-          user: url.pathname.split("/")[1].substring(1),
-          assignment: url.pathname.split("/")[3],
-          result: isPass
-      }
-      studentHooks(body)
-  }
-
     const checkResults = () =>{
     for(const res of props.res){
         if(res.result == "FAIL"){
@@ -34,10 +18,7 @@ const  AssgResults = (props) => {
         }
     }
     ani = false;
-    saveResult();
   }
-
-
 
   //checkResult() only if res is not empty.
   if(props.res != null){
@@ -91,8 +72,6 @@ const  AssgResults = (props) => {
       ))} 
       </div>
       </div>
-
-
       <button onClick={() => props.onLoading()}> Ok </button>
       </>
     )}
