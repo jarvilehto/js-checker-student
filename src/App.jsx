@@ -1,8 +1,5 @@
-import { useState } from 'react'
 import './App.css'
 import AssgSelector from './components/AssgSelector'
-import AssgResults from './components/AssgResults'
-
 
 function App() {
   return (

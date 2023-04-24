@@ -23,6 +23,7 @@ export default function useResource() {
         })
         .catch((error) => console.log(error.message));
     }
+
     const service = {post}
     return [resources, service, results]
 }

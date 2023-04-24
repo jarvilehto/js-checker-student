@@ -1,6 +1,5 @@
 import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player'
-import studentHooks from '../hooks/studentHooks'
 
 const  AssgResults = (props) => {
     /*
