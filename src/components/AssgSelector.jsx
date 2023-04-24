@@ -3,7 +3,8 @@ import { useState } from 'react'
 import useResource from '../hooks/useResource'
 import { FaChevronRight } from "react-icons/fa"
 import AssgResults from './AssgResults'
-import useTest from '../hooks/testHook'
+import {useTest} from '../hooks/testHook'
+import {isValidUrl} from '../tools/functions'
 
 const AssgSelector = () => {
   //States for assignment related variables
@@ -45,16 +46,6 @@ const AssgSelector = () => {
     }
   }
 
-  // Checks if userinput is a valid URL.
-  const isValidUrl = (urlString)=> {
-	  	var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
-	    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
-	    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
-	    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
-	    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
-	    '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator~
-	    return !!urlPattern.test(urlString);
-	}
 
   /*
     1. Checks if assg and url fields are not empyty
@@ -72,7 +63,7 @@ const AssgSelector = () => {
         if(isValidUrl(url)){
         const body = {url: url}
         onLoading();
-        const b = await useTest(assg,body);
+        const b = await useTest(assg,body); 
         setRes(b);
         }else{
           alert("Invalid URL!")
