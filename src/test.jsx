@@ -52,9 +52,9 @@ export default function Test() {
         <h1>EvaluateJS</h1>
       </div>
     <div className='assgContainer'>
-      <p>2. Paste the URL to the assignment HTML from your users.metropolia.fi</p>
-      <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder={url}/> 
-      <p>3. Send code for evaluation!</p>
+      <h2>Evaluation for assignment: ${assg.name}</h2>
+      <input className="assgInput"name="Assignment URL" onChange={(event) => onUrlChange(event.target.value)} placeholder={{url}}/> 
+      <p>Send code for evaluation!</p>
       <button className="assgBtn" onClick={onEvaluate}>Send</button>
      </div>
      </>
