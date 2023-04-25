@@ -13,18 +13,32 @@
   overflow-y: scroll;
 }
 
-
-
-.read-the-docs {
-  color: #888;
+button {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: border-color 0.25s;
 }
 
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
 
 .header {
   display: flex;
   text-align: start;
   align-items: center;
-  font-weight:800;
+  font-weight: 800;
   border-bottom: 5px solid orange;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -35,10 +49,8 @@
   margin-bottom: 0.2em;
   font-size: 2.5em;
   font-weight: bolder;
+  line-height: 1.1;
 }
-
-
-
 
 .assgContainer {
   display: flex;
@@ -56,30 +68,29 @@
   margin-bottom: 100px;
 }
 
-
-
-
 .assgInput {
-    width: 80%;
-    border-radius: 10px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
-    height: 35px;
-    padding: 5px;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  height: 35px;
+  padding: 5px;
 }
 
-.assgBtn{
+.assgBtn {
   height: 3em;
 }
 
-
-
+/*
+  This section includes css for elements that are associated
+  with the dropdown menu for selecting assignments / courses.
+*/
 
 .dropdown {
   width: 80%;
-  position:absolute;
+  position: absolute;
   top: 25%;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, .1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   background-color: white;
 }
 
@@ -94,7 +105,7 @@
 .dropdown-body {
   max-height: 0;
   padding: 5px;
-  border-top: 1px solid #E5E8EC;
+  border-top: 1px solid #e5e8ec;
   display: none;
 }
 
@@ -114,28 +125,22 @@
 
 .dropdown-item-dot {
   opacity: 0;
-  color: #91A5BE;
-  transition: all .2s ease-in-out;
+  color: #91a5be;
+  transition: all 0.2s ease-in-out;
 }
 
 .dropdown-item-dot.selected {
   opacity: 1;
 }
 
+/* CSS For dropdown menu chevron icon */
 .icon {
   font-size: 13px;
-  color: #91A5BE;
+  color: #91a5be;
   transform: rotate(0deg);
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .icon.open {
   transform: rotate(90deg);
 }
-
-
-
-
-
-
-
